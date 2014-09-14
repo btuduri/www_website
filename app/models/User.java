@@ -65,6 +65,14 @@ public class User extends Model {
         return options;
     }
 
+    public static User authenticate(final String userName,
+                                    final String passWord) {
+        return find.where()
+                .eq("username", userName)
+                    .eq("password", passWord)
+                        .findUnique();
+    }
+
     public String toString() {
         return "obj User: " + username + " cle vote saisie=" + votekey;
     }

@@ -1,0 +1,26 @@
+@(listUsers: List[User])
+<!DOCTYPE html>
+
+<html>
+<head>
+     <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+    <title>Creation user index</title>
+</head>
+<body>
+    @if(listUsers.isEmpty) {
+       <p>Aucun utilsateurs enregistrés.</p>
+    } else {
+        <ul>
+        @for(user <- listUsers) {
+            <li> <strong>username  : </strong> @user.username <br />
+            <strong> nickname  : </strong> @user.nickname <br />
+            <strong> groupname : </strong> @user.groupname </li>
+        }
+        </ul>
+    }
+    <a class="btn btn-success" id="add" href=@routes.UserCtl.show()>Créer un nouvel user</a>
+    &nbsp;
+    <a class="btn" href="@routes.Application.index()">Retour au menu general</a>
+</body>
+</html>

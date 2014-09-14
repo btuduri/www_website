@@ -1,0 +1,28 @@
+@(productionList: List[Production])
+
+@import helper._
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+    <title>vote creation formulaire</title>
+</head>
+<body>
+    @form(action=routes.VoteCtl.vote) {
+        @for(p <- productionList) {
+               <h1>@p.compo</h1>
+               <ul>
+                    <li>user : @p.user</li>
+                    <li>compo name : @p.name</li>
+                    <li>comment : @p.comment</li>
+                </ul>
+            }
+        }
+        <input type="submit" value="Voter" class="btn btn-primary">
+        &nbsp;
+        <a class="btn" href="/"> Annuler</a>
+</body>
+</html>

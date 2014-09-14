@@ -5,5 +5,33 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+#########
+# user
+########################
+# user gestion des users
+GET     /user                       controllers.UserCtl.index()
+GET     /user/new                   controllers.UserCtl.show()
+POST    /user                       controllers.UserCtl.create()
+
+########################
+# user gestion login
+GET     /login                      controllers.UserCtl.login()
+POST    /login                      controllers.UserCtl.authenticate()
+GET     /logout                     controllers.UserCtl.logout()
+
+
+##########################
+# upload des prods
+GET     /production                 controllers.ProductionCtl.index()
+GET     /production/new             controllers.ProductionCtl.show()
+POST    /production                 controllers.ProductionCtl.upload()
+
+##########################
+# vote
+GET     /vote                       controllers.VoteCtl.show()
+POST    /vote                       controllers.VoteCtl.vote()
+
+GET     /webjars/*file              controllers.WebJarAssets.at(file)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

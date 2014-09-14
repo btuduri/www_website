@@ -1,0 +1,27 @@
+@(formProduction: Form[Production])
+
+@import helper._
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+    <title>production creation</title>
+</head>
+<body>
+    @form(action=routes.ProductionCtl.upload, 'enctype -> "multipart/form-data") {
+        <fieldset>
+            @inputText(formProduction("name"))
+            @inputText(formProduction("comment"))
+            @select(formProduction("compo"), options(Compo.options()))
+            @select(formProduction("user"), options(User.options()))
+            @inputFile(formProduction("filename"))
+        </fieldset>
+        <input type="submit" value="Publier production" class="btn btn-primary">
+        &nbsp;
+        <a class="btn" href="@routes.ProductionCtl.index()"> Annuler</a>
+    }
+</body>
+</html>

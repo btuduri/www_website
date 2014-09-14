@@ -1,0 +1,27 @@
+@(formUser: Form[User])
+
+@import helper._
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+    <title>creation user</title>
+</head>
+<body>
+    @form(routes.UserCtl.create()) {
+        <fieldset>
+            @inputText(formUser("username"))
+            @inputPassword(formUser("password"))
+            @inputText(formUser("nickname"))
+            @inputText(formUser("groupname"))
+            @inputText(formUser("votekey"))
+        </fieldset>
+        <input type="submit" value="Creer user" class="btn btn-primary">
+        &nbsp;
+        <a class="btn" href="@routes.UserCtl.index()"> Annuler</a>
+    }
+</body>
+</html>

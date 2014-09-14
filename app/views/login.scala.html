@@ -1,0 +1,29 @@
+@(form: Form[UserCtl.Login])
+<html>
+    <head>
+        <title>Identificatiion</title>
+    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+    </head>
+    <body>
+        <header>
+@helper.form(routes.UserCtl.authenticate) {
+            <p>
+                <input type="text" name="username" placeholder="Username" value="@form("username").value">
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="Password">
+            </p>
+            <p>
+                <button type="submit">Login</button>
+            </p>
+@if(form.hasGlobalErrors) {
+            <p class="error">
+                @form.globalError.message
+            </p>
+}
+        }
+        </header>
+    
+    </body>
+</html>
