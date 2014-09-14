@@ -9,7 +9,7 @@ GET     /                           controllers.Application.index()
 # user
 ########################
 # user gestion des users
-GET     /user                       controllers.UserCtl.index()
+#GET     /user                       controllers.UserCtl.index()
 GET     /user/new                   controllers.UserCtl.show()
 POST    /user                       controllers.UserCtl.create()
 

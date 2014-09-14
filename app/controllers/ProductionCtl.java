@@ -21,13 +21,15 @@ public class ProductionCtl extends Controller {
 
     static Form<Production> formulaire = form(Production.class);
 
+    @Security.Authenticated(Secured.class)
     public static Result index() {
         List<Compo> l = Compo.find.where().eq("uploadOpen", true).findList();
         if (l != null && l.size() > 0) {
         return ok(
             listeProductionUploadView.render(
                 Production.find.where()
-                    .orderBy("name ASC").findList()));
+                    .eq("user", Http.Context.current().session().get("userid"))
+                        .orderBy("name ASC").findList()));
         } else {
             l = Compo.find.where().eq("voteOpen", true).findList();
             if (l != null && l.size() > 0) {
@@ -37,10 +39,12 @@ public class ProductionCtl extends Controller {
         }
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result show() {
         return ok(creationProductionUploadView.render(formulaire));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result upload() {
         Form<Production> filledForm = formulaire.bindFromRequest();
         Logger.info(" filledForm created ");
@@ -56,12 +60,15 @@ public class ProductionCtl extends Controller {
             );
        }
 
+
+        Logger.error(Http.Context.current().session().get("userid"));
         Production p = Production.find.where().eq("user",
-            filledForm.field("user").value())
+            Http.Context.current().session().get("userid"))
                 .eq("compo",
                     filledForm.field("compo").value()).findUnique();
 
-        Compo comp = Compo.find.where().eq("compo",
+
+        Compo comp = Compo.find.where().eq("id",
             filledForm.field("compo").value())
                 .findUnique();
 
@@ -105,17 +112,22 @@ public class ProductionCtl extends Controller {
             Logger.debug(ioe.getMessage());
         }
 
-
         if (p == null) {
             p =filledForm.get();
             p.filename = prod.getFilename();
+            //p.user = Http.Context.current().session().get("userid");
+            //p.save();
         } else {
             p.name = filledForm.field("name").value();
             p.comment = filledForm.field("comment").value();
             p.filename = prod.getFilename();
+            //p.user = Http.Context.current().session().get("userid");
+            //p.update();
         }
 
+        p.user = Http.Context.current().session().get("userid");
         p.save();
+
         return GO_HOME;
     }
 }

@@ -12,16 +12,16 @@ import models.*;
 public class UserCtl extends Controller {
 
     public static Result GO_HOME = redirect(
-           routes.UserCtl.index()); 
+           routes.Application.index());
 
     static Form<User> formulaire = form(User.class);
 
-    public static Result index() {
+/*    public static Result index() {
         return ok(
             listeUserView.render(
                 User.find.where()
                     .orderBy("username ASC").findList()));
-    }
+    }*/
 
     public static Result show() {
         return ok(creationUserView.render(formulaire));
@@ -108,6 +108,7 @@ public class UserCtl extends Controller {
         } else {
             session().clear();
             session("username", loginForm.get().username);
+            session("userid", loginForm.get().userid.toString());
             return redirect(routes.Application.index());
         }
     }
@@ -115,10 +116,13 @@ public class UserCtl extends Controller {
     public static class Login {
         public String username;
         public String password;
+        public Long userid;
 
         public String validate() {
-            if (User.authenticate(username, password) == null)
+            User u = User.authenticate(username, password);
+            if (u == null)
                 return "Invalid user or password";
+            userid = u.id;
             return null;
         }
     }

@@ -12,7 +12,7 @@
         <h1></h1>
         <ul>
             @if(session.get("username") == null) {
-            <li><a href="@routes.UserCtl.index()">Creation utilisateur</a></li>
+            <li><a href="@routes.UserCtl.show()">Creation utilisateur</a></li>
             <li><a href="@routes.UserCtl.login()">identification</a></li>
             } else {
             <li>Hello @session.get("username") !</li>
