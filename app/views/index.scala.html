@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -9,12 +10,16 @@
     </head>
     <body>
         <h1></h1>
-
         <ul>
+            @if(session.get("username") == null) {
             <li><a href="@routes.UserCtl.index()">Creation utilisateur</a></li>
             <li><a href="@routes.UserCtl.login()">identification</a></li>
+            } else {
+            <li>Hello @session.get("username") !</li>
+            <li><a href="@routes.UserCtl.logout()">Deconnexion</a></li>
             <li><a href="@routes.ProductionCtl.index()">Creation production</a></li>
             <li><a href="@routes.VoteCtl.show()">Vote</a></li>
+            }
         </ul>
     </body>
 </html
