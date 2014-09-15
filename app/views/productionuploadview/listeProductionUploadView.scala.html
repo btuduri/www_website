@@ -16,6 +16,7 @@
             <li> <strong> name : </strong> @production.name <br />
                  <strong> comment : </strong> @production.comment <br />
                  <strong> filename : </strong> @production.filename <br />
+                 <strong> compo : </strong> @Compo.find.where().eq("id",production.compo).findUnique().name <br />
             </li>
         }
         </ul>
