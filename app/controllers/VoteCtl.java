@@ -16,16 +16,22 @@ public class VoteCtl extends Controller {
     public static Result GO_HOME = redirect(
            routes.VoteCtl.show());
 
-    static Form<Production> formulaire = form(Production.class);
+    static Form<Vote> formulaire = form(Vote.class);
 
     public static Result index() {
         List<Compo> l = Compo.find.where().eq("uploadOpen", true).findList();
+        Logger.error("1 -> " + l.toString());
         if (l != null && l.size() > 0) {
             return redirect("/");
         }
 
         l = Compo.find.where().eq("voteOpen", false).findList();
+        Logger.error("2 -> " + l.toString());
          if (l != null && l.size() > 0) {
+            return redirect("/");
+        }
+
+        if (l != null && l.size() == 0) {
             return redirect("/");
         }
 
@@ -43,7 +49,7 @@ public class VoteCtl extends Controller {
         Logger.debug(p.toString());
         Logger.debug("----");
 
-        return ok(creationVote.render(p));
+        return ok(creationVote.render(p, formulaire));
     }
 
     public static Result show() {
@@ -51,6 +57,11 @@ public class VoteCtl extends Controller {
     }
 
     public static Result vote() {
+        Logger.debug("totoo");
+        Form<Vote> filledForm = formulaire.bindFromRequest();
+        Logger.error("--" + filledForm.toString());
+
+
 /*
         Form<Production> filledForm = formulaire.bindFromRequest();
         Logger.info(" filledForm created ");
@@ -110,6 +121,6 @@ public class VoteCtl extends Controller {
         }
 
         p.save();
-*/        return GO_HOME;
+*/        return redirect("/"); //GO_HOME;
     }
 }
