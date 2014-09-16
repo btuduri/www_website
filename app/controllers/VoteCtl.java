@@ -18,20 +18,22 @@ public class VoteCtl extends Controller {
 
     static Form<Vote> formulaire = form(Vote.class);
 
+    @Security.Authenticated(Secured.class)
     public static Result index() {
         List<Compo> l = Compo.find.where().eq("uploadOpen", true).findList();
-        Logger.error("1 -> " + l.toString());
+        Logger.error("-> uploadOpen " + l.size());
         if (l != null && l.size() > 0) {
             return redirect("/");
         }
 
         l = Compo.find.where().eq("voteOpen", false).findList();
-        Logger.error("2 -> " + l.toString());
+        Logger.error("-> voteOpen " + l.size());
          if (l != null && l.size() > 0) {
             return redirect("/");
         }
 
-        if (l == null || l.size() == 0) {
+        Logger.error("-> vote 3 - " + l.size());
+        if (l == null) {
             return redirect("/");
         }
 
@@ -52,10 +54,12 @@ public class VoteCtl extends Controller {
         return ok(creationVote.render(p, formulaire));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result show() {
         return index();
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result vote() {
         Logger.debug("totoo");
         Form<Vote> filledForm = formulaire.bindFromRequest();
