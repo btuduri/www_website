@@ -77,6 +77,6 @@ public class User extends Model {
         return "obj User: " + username + " cle vote saisie=" + votekey;
     }
 
-    public static Finder<Long, User> find =
-                    new Finder<Long, User>(Long.class, User.class);
+    public static Model.Finder<Long, User> find =
+                    new Model.Finder<Long, User>(Long.class, User.class);
 }

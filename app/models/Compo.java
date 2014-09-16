@@ -80,6 +80,6 @@ public class Compo extends Model {
                " uploadOpen: " + uploadOpen;
     }
 
-    public static Finder<Long, Compo> find =
-                    new Finder<Long, Compo>(Long.class, Compo.class);
+    public static Model.Finder<Long, Compo> find =
+                    new Model.Finder<Long, Compo>(Long.class, Compo.class);
 }

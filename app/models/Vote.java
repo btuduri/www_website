@@ -23,8 +23,10 @@ public class Vote extends Model {
     @OneToOne()
     public Production production;
 
-    @Required
     public Long note;
+
+    @Required
+    public String noteString;
 
     public Vote() {
     }
@@ -32,11 +34,13 @@ public class Vote extends Model {
     public Vote(final User user,
                 final Compo compo,
                 final Production production,
-                final Long note) {
+                final Long note,
+                final String noteString) {
         this.user = user;
         this.compo = compo;
         this.production = production;
         this.note = note;
+        this.noteString = noteString;
     }
 
     public String toString() {
@@ -44,10 +48,11 @@ public class Vote extends Model {
                 user + " Compo obj: " +
                 compo + " Production obj : " +
                 production + " note obj : " +
-                note;
+                note + " noteString : " +
+                noteString;
     }
 
-    public static Finder<Long, Vote> find =
-                    new Finder<Long, Vote>(Long.class, Vote.class);
+    public static Model.Finder<Long, Vote> find =
+                    new Model.Finder<Long, Vote>(Long.class, Vote.class);
 
 }

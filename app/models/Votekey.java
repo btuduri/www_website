@@ -33,6 +33,6 @@ public class Votekey extends Model {
         return "obj Votekey: " + user + "votekey: " + votekey;
     }
 
-    public static Finder<Long, Votekey> find =
-                    new Finder<Long, Votekey>(Long.class, Votekey.class);
+    public static Model.Finder<Long, Votekey> find =
+                    new Model.Finder<Long, Votekey>(Long.class, Votekey.class);
 }

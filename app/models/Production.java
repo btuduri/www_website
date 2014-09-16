@@ -58,6 +58,6 @@ public class Production extends Model {
         return "name prod: " + name + " comment: " + comment + " user obj: " + user + "compo: " + compo + " filename: " + filename + "upload date: " + uploadDate;
     }
 
-    public static Finder<Long, Production> find =
-                    new Finder<Long, Production>(Long.class, Production.class);
+    public static Model.Finder<Long, Production> find =
+                    new Model.Finder<Long, Production>(Long.class, Production.class);
 }
