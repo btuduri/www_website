@@ -31,7 +31,7 @@ public class VoteCtl extends Controller {
             return redirect("/");
         }
 
-        if (l != null && l.size() == 0) {
+        if (l == null || l.size() == 0) {
             return redirect("/");
         }
 
