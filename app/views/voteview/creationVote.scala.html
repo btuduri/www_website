@@ -1,4 +1,4 @@
-@(productionList: List[Production])
+@(productionList: List[Production])(formVote : Form[Vote])
 
 @import helper._
 
@@ -18,6 +18,11 @@
                     <li>user : @p.user</li>
                     <li>compo name : @p.name</li>
                     <li>comment : @p.comment</li>
+                    <li>@inputRadioGroup(
+                       formVote("note"),
+                            options = options("1"->"1","2"->"2","3"->"3","4"->"4","5"->"5"),
+                            '_label -> "note"
+                     )</li>
                 </ul>
             }
         }
