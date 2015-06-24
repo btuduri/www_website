@@ -2,11 +2,8 @@ package models;
 
 import javax.persistence.*;
 
-import javax.validation.*;
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
-
-import com.avaje.ebean.*;
 
 import java.util.*;
 import play.*;
@@ -14,9 +11,9 @@ import play.*;
 @Entity
 public class User extends Model {
     @Id
-    public Long id;
+    private Long id;
     @Required
-    public String username;
+    private String username;
     @Required
     public String password;
     public String nickname;
@@ -30,6 +27,9 @@ public class User extends Model {
     @OneToOne(mappedBy="user")
     public Vote vote;
 
+    @OneToOne(mappedBy="user")
+    public Production production;
+
     public User() {
     }
 
@@ -37,7 +37,7 @@ public class User extends Model {
                 final String passWord,
                 final String nickName,
                 final String groupName) {
-        username = userName;
+        setUsername(userName);
         password = passWord;
         nickname = nickName;
         groupname = groupName;
@@ -60,7 +60,7 @@ public class User extends Model {
         Logger.debug(users.toString());
         LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
         for(User u: users) {
-            options.put(u.id.toString(), u.username);
+            options.put(u.getId().toString(), u.getUsername());
         }
         return options;
     }
@@ -74,9 +74,25 @@ public class User extends Model {
     }
 
     public String toString() {
-        return "obj User: " + username + " cle vote saisie=" + votekey;
+        return "obj User: " + getUsername() + " cle vote saisie=" + votekey;
     }
 
     public static Model.Finder<Long, User> find =
                     new Model.Finder<Long, User>(Long.class, User.class);
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

@@ -5,23 +5,28 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
-    <title>creation user</title>
-</head>
-<body>
+    <head>
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("bootstrap/js/bootstrap.min.js")"></script>
+        <title>creation user</title>
+    </head>
+    <body>
     @form(routes.UserCtl.create()) {
         <fieldset>
-            @inputText(formUser("username"))
-            @inputPassword(formUser("password"))
-            @inputText(formUser("nickname"))
-            @inputText(formUser("groupname"))
-            @inputText(formUser("votekey"))
+            <legend>Add an user</legend>
+            <div class="row">
+                @inputText(formUser("username"))
+                @inputPassword(formUser("password"))
+                @inputText(formUser("nickname"))
+                @inputText(formUser("groupname"))
+                @inputText(formUser("votekey"))
+            </div>
         </fieldset>
         <input type="submit" value="Creer user" class="btn btn-primary">
-        &nbsp;
+            &nbsp;
         <a class="btn" href="@routes.Application.index()"> Annuler</a>
     }
-</body>
+    </body>
 </html>

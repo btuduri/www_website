@@ -1,15 +1,20 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
-import static play.mvc.Http.*;
-import play.data.*;
-import static play.data.Form.*;
+import models.Compo;
+import models.Production;
+import models.User;
+import models.Vote;
+import play.Logger;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
+import views.html.voteview.creationVote;
 
-import views.html.voteview.*;
-import models.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.*;
+import static play.data.Form.form;
 
 
 public class VoteCtl extends Controller {
@@ -44,8 +49,8 @@ public class VoteCtl extends Controller {
         for (Production e : p) {
             Compo c = Compo.find.where().eq("id",e.compo).findUnique();
             User u = User.find.where().eq("id", e.user).findUnique();
-            e.compo = c.name;
-            e.user = u.username;
+            e.compo.setName( c.getName());
+            e.user.setUsername(u.getUsername());
         }
         Logger.debug("----");
         Logger.debug(p.toString());

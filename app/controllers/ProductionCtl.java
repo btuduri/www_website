@@ -125,7 +125,9 @@ public class ProductionCtl extends Controller {
             //p.update();
         }
 
-        p.user = Http.Context.current().session().get("userid");
+        try {
+        p.user.setId( Long.parseLong(Http.Context.current().session().get("userid").toString()));
+        } catch (NumberFormatException ex){}
         p.save();
 
         return GO_HOME;

@@ -1,16 +1,11 @@
 package models;
 
-import org.joda.time.*;
-
 import java.util.*;
 import javax.persistence.*;
 
-import javax.validation.*;
 import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.Constraints.*;
-
-import com.avaje.ebean.*;
 
 import play.*;
 
@@ -20,7 +15,7 @@ public class Compo extends Model {
     public Long id;
 
     @Required
-    public String name;
+    private String name;
 
     @Formats.DateTime(pattern="dd-MM-yyyy HH:mm:ss")
     public Date startDate;
@@ -40,6 +35,9 @@ public class Compo extends Model {
     @OneToOne(mappedBy="compo")
     public Vote vote;
 
+    @OneToOne(mappedBy="compo")
+    public Production production;
+
     public Compo() {
     }
 
@@ -49,7 +47,7 @@ public class Compo extends Model {
                  final String aDirectoryPath,
                  final boolean aVoteOpen,
                  final boolean aUploadOpen) {
-        name = aName;
+        setName(aName);
         startDate = aStartDate;
         endDate = aEndDate;
         directoryPath = aDirectoryPath;
@@ -66,13 +64,13 @@ public class Compo extends Model {
         Logger.debug(compos.toString());
         LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
         for(Compo c: compos) {
-            options.put(c.id.toString(), c.name);
+            options.put(c.id.toString(), c.getName());
         }
         return options;
     }
 
     public String toString() {
-        return "compo name: " + name +
+        return "compo name: " + getName() +
                " startDate: " + startDate +
                "endDate: " + endDate +
                " directoryPath: " + directoryPath +
@@ -82,4 +80,12 @@ public class Compo extends Model {
 
     public static Model.Finder<Long, Compo> find =
                     new Model.Finder<Long, Compo>(Long.class, Compo.class);
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

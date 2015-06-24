@@ -13,13 +13,13 @@
     } else {
         <ul>
         @for(user <- listUsers) {
-            <li> <strong>username  : </strong> @user.username <br />
+            <li> <strong>username  : </strong> @user.getUsername() <br />
             <strong> nickname  : </strong> @user.nickname <br />
             <strong> groupname : </strong> @user.groupname </li>
         }
         </ul>
     }
-    <a class="btn btn-success" id="add" href=@routes.UserCtl.show()>Créer un nouvel user</a>
+    <a class="btn btn-success" id="add" href="@routes.UserCtl.show()">Créer un nouvel user</a>
     &nbsp;
     <a class="btn" href="@routes.Application.index()">Retour au menu general</a>
 </body>

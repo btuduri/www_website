@@ -122,7 +122,7 @@ public class UserCtl extends Controller {
             User u = User.authenticate(username, password);
             if (u == null)
                 return "Invalid user or password";
-            userid = u.id;
+            userid = u.getId();
             return null;
         }
     }
