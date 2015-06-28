@@ -1,25 +1,32 @@
-
 <!DOCTYPE html>
 
 <html>
     <head>
         <title>WWW Demojs</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script type="text/javascript" src="@routes.Assets.at("bootstrap/js/bootstrap.min.js")"></script>
     </head>
     <body>
-        <h1></h1>
-        <ul>
+       <div class="navbar navbar-default">
+            <div class="navbar-header">
+            <span class="navbar-brand" href="#">Menu :</span>
+            </div>
+            <ul class="nav navbar-nav">
             @if(session.get("username") == null) {
-            <li><a href="@routes.UserCtl.show()">Creation utilisateur</a></li>
-            <li><a href="@routes.UserCtl.login()">identification</a></li>
+                <li><a href="@routes.UserCtl.show()">Creation utilisateur</a></li>
+                <li><a href="@routes.UserCtl.login()">identification</a></li>
             } else {
-            <li>Hello @session.get("username") !</li>
-            <li><a href="@routes.UserCtl.logout()">Deconnexion</a></li>
-            <li><a href="@routes.ProductionCtl.index()">Creation production</a></li>
-            <li><a href="@routes.VoteCtl.show()">Vote</a></li>
+                <li>Hello @session.get("username") !</li>
+                <li><a href="@routes.UserCtl.logout()">Deconnexion</a></li>
+                <li><a href="@routes.ProductionCtl.index()">Creation production</a></li>
+                <li><a href="@routes.VoteCtl.show()">Vote</a></li>
             }
-        </ul>
+            </ul>
+        </div>
+        <h1>Bienvenue sur DemoJS</h1>
+        <p>Vous pouvez naviguez dans le menu ci-dessus.</p>
     </body>
-</html
+</html>
